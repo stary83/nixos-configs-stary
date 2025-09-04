@@ -1,0 +1,5 @@
+# Ignore sensitive or temporary files
+*.bak
+*.swp
+result
+
