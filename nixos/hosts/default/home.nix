@@ -7,7 +7,6 @@ in {
   home.username = "stary";
   home.homeDirectory = "/home/stary";
   imports = [
-    ../../modules/home-manager/gpg.nix  # Or whatever relative path you used
 
   ];
 

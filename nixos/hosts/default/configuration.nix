@@ -30,6 +30,10 @@ in {
 
   # Enable networking
   networking.networkmanager.enable = true;
+  
+  # Makes timedatectl ntp bet true
+  networking.timeServers = [ "pool.ntp.org" "time.google.com" "time.windows.com" ];
+  services.timesyncd.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Tehran";
@@ -144,11 +148,10 @@ in {
     extraSpecialArgs = { inherit inputs; };
     users = {
       "stary" = {
-      imports = [
-        ./home.nix
-	inputs.self.outputs.homeManagerModules.default
-      ];
-
+        imports = [
+          ./home.nix
+	  inputs.self.outputs.homeManagerModules.default
+        ];
       };
     };
   };
@@ -161,10 +164,11 @@ in {
   
   # Allow appimage files to be run
   programs.appimage.binfmt = true;
-  
+ 
   nixpkgs.config.allowBroken = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  
   environment.systemPackages = with pkgs; [
     gnome-tweaks #for gnome speciffically
     gnome-console #for gnome speciffically
@@ -199,24 +203,11 @@ in {
     # ---------------- end of wine pkgs
     alacritty
     libgcc
-    nekoray
     appimage-run
     unstable.ghostty
     prismlauncher
     gcc
     torrential
-    #virtual machine pkgs
-    qemu_full
-    libvirt
-    bridge-utils
-    virt-manager
-    virt-viewer
-    edk2
-    vde2
-    dnsmasq
-    bridge-utils
-    libguestfs
-    #end of virtual machine pkgs
     openvpn
     smartdns
     sstp
@@ -224,29 +215,9 @@ in {
     wireguard-tools
     libproxy
     davinci-resolve
-    cloudflare-warp
     pass
   ];
 
-
-  # virtual machine configurations
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [(pkgs.OVMF.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd];
-      };
-    };
-  };
-  boot.extraModprobeConfig = "options kvm_intel nested=1";
-  virtualisation.spiceUSBRedirection.enable = true; 
 
   fonts = {
     fontDir.enable = true;  # Ensures /run/current-system/sw/share/X11/fonts exists

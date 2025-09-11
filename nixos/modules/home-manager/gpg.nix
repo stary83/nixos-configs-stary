@@ -1,5 +1,11 @@
-{ pkgs, lib, inputs, ... }: {
-  config = {
+{ pkgs, lib, config, ... }: {
+
+  options = {
+    gpg.enable =
+      lib.mkEnableOption "enables gpg";
+  };
+
+  config = lib.mkIf config.gpg.enable {
     programs.gpg = {
       enable = true;
       # Optional: Set a custom homedir if not using the default ~/.gnupg
