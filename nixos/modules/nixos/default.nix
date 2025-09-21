@@ -4,7 +4,8 @@
   imports = [
     ./main-user.nix
     ./basicneeds.nix
-    ./virtual-machine-pkgs.nix
+    ./virtual-machine-pkgs/default.nix
+    ./stylix.nix
   ];
   basicneeds.enable = true;
 

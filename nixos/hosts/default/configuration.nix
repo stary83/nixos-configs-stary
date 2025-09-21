@@ -13,48 +13,149 @@ in {
       inputs.home-manager.nixosModules.default
     ];
   
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  powerManagement.powertop.enable = true;
+
   main-user.enable = true;
   main-user.userName = "stary";
+  security = {
+    rtkit.enable = true;
+    wrappers = {
+      nekoray = {
+        source = "${pkgs.nekoray}/bin/nekoray";
+        capabilities = "cap_net_admin,cap_net_raw,cap_net_bind_service,cap_sys_ptrace,cap_dac_read_search+ep";
+        owner = "stary";
+        group = "users";
+      };
+    };
+  };
+
 
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
-
-  networking.hostName = "StarThought"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  
-  # Makes timedatectl ntp bet true
-  networking.timeServers = [ "pool.ntp.org" "time.google.com" "time.windows.com" ];
-  services.timesyncd.enable = true;
-
   # Set your time zone.
   time.timeZone = "Asia/Tehran";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.excludePackages = with pkgs; [
-    xterm
-  ];
-
-  services.xserver.videoDrivers = [ "modesetting" ];
+  networking = {
+    hostName = "StarThought"; # Define your hostname.
+    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    # Configure network proxy if necessary
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    
+    networkmanager.enable = true;
 
-  # Enable the Gnome Dekstop Environment
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+    timeServers = [ "pool.ntp.org" "time.google.com" "time.windows.com" ];
+
+  };
+
+  hardware = {
+    graphics.enable = true;
+    # For Bluetooth
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
+
+  
+  fonts = {
+    fontDir.enable = true;  # Ensures /run/current-system/sw/share/X11/fonts exists
+    packages = with pkgs; [
+      corefonts
+      nerd-fonts.jetbrains-mono
+      roboto
+      source-sans
+      font-awesome
+      openmoji-color
+      #xb-roya # Custom XB Roya font
+      #xb-titre # Custom XB Titre font
+    ];
+  };
+
+
+  
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+
+    # platformTheme = "qtct";
+    # style.name = "kvantum";
+  }; 
+
+  programs = {
+    # Allow appimage files to be run
+    appimage.binfmt = true;
+    firefox.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      withUWSM = true;
+    };
+    gamemode.enable = true;
+    xwayland.enable = true;
+  };
+
+  services = {
+    # Enable the Gnome Dekstop Environment & x11 windowing system
+    xserver = {
+      enable = true;
+      # excludePackages = with pkgs; [ 
+      #   xterm 
+      # ];
+      displayManager.gdm.enable = true;
+      desktopManager.kodi.enable = true;
+      desktopManager.gnome.enable = true;
+      # videoDrivers = [ "modesetting" ];
+      xkb = {
+        layout = "us"; #add ir for farsi
+        variant = "";
+        #options = "grp:alt_space_toggle";
+      };
+    };
+    displayManager.defaultSession = "hyprland-uwsm"; # default option after logging in
+    
+
+    displayManager.sddm.wayland.enable = true;
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    timesyncd.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
+  };
+
+  environment = {
+    variables = {
+      EDITOR = "nvim";
+      SUDO_EDITOR = "nvim";
+      
+      terminal = "ghostty";
+    };
+    sessionVariables = {
+      # for running qt based applications
+    };
+  };
+
 
 
   environment.gnome.excludePackages = with pkgs; [
@@ -106,40 +207,11 @@ in {
     yelp
     gnome-software
   ];
- 
 
 
-  hardware.graphics.enable = true;
-
-  # For Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us"; #add ir for farsi
-    variant = "";
-    #options = "grp:alt_space_toggle";
-  };
 
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -156,23 +228,24 @@ in {
     };
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;	
   
-  # Allow appimage files to be run
-  programs.appimage.binfmt = true;
- 
   nixpkgs.config.allowBroken = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   
   environment.systemPackages = with pkgs; [
-    gnome-tweaks #for gnome speciffically
-    gnome-console #for gnome speciffically
+    brightnessctl # allows to control brightness
+    playerctl # allows for video/audio playback control
+    wl-clipboard # clipboard manager
+    clipse # clipboard manager
+
+    gnome-tweaks 
     nautilus # file manager
+    networkmanagerapplet
+    xdg-utils
     google-chrome
     neovim
     yt-dlp
@@ -181,26 +254,6 @@ in {
     jdk
     linux-wifi-hotspot
     vscode
-    # -------------wine pkgs for gaming
-    wineWowPackages.full
-    giflib
-    gnutls
-    v4l-utils
-    libpulseaudio
-    alsa-plugins
-    alsa-lib
-    sqlite
-    xorg.libXcomposite
-    ocl-icd
-    libva
-    gtk3
-    gst_all_1.gst-plugins-base
-    vulkan-loader
-    SDL2
-    winetricks
-    wineWowPackages.staging
-    dxvk
-    # ---------------- end of wine pkgs
     alacritty
     libgcc
     appimage-run
@@ -214,19 +267,42 @@ in {
     unrar
     wireguard-tools
     libproxy
+    base16-schemes
     davinci-resolve
+
     pass
+    qtpass
+
+
+
+    power-profiles-daemon
+    # floorp #browser
+    
+    # wineWowPackages.stable
+    # wineWowPackages.waylandFull
+    # winetricks
+    # protontricks
+    # protonup
+    # protonup-rs
+    # protonup-qt
+    # protonplus
+    # lutris
+    # heroic
+    # bottles
+    # mangohud
+    # steamcmd
+    # ntfs3g # to run steam games on ntfs drives with linux - drive needs to be mounted with ntfs-3g too, to make it work
+
+    rose-pine-gtk-theme
+    rose-pine-icon-theme
+    bluez
+    bluez-tools
+    p7zip
+    pavucontrol # PulseAudio Volume Control
+
   ];
 
 
-  fonts = {
-    fontDir.enable = true;  # Ensures /run/current-system/sw/share/X11/fonts exists
-    packages = with pkgs; [
-      corefonts
-      #xb-roya # Custom XB Roya font
-      #xb-titre # Custom XB Titre font
-    ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -2,16 +2,16 @@
 
 {
   imports = [
-    ./virtual-machine-pkgs/qemu-full.nix
-    ./virtual-machine-pkgs/libvirt.nix
-    ./virtual-machine-pkgs/bridge-utils.nix
-    ./virtual-machine-pkgs/virt-manager.nix
-    ./virtual-machine-pkgs/virt-viewer.nix
-    ./virtual-machine-pkgs/edk2.nix
-    ./virtual-machine-pkgs/vde2.nix
-    ./virtual-machine-pkgs/dnsmasq.nix
-    ./virtual-machine-pkgs/libguestfs.nix
-    ./virtual-machine-pkgs/settings-for-virtual-machine.nix
+    ./qemu-full.nix
+    ./libvirt.nix
+    ./bridge-utils.nix
+    ./virt-manager.nix
+    ./virt-viewer.nix
+    ./edk2.nix
+    ./vde2.nix
+    ./dnsmasq.nix
+    ./libguestfs.nix
+    ./settings-for-virtual-machine.nix
   ];
   qemu-full.enable = 
     lib.mkDefault true;

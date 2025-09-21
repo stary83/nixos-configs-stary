@@ -10,6 +10,13 @@ in {
 
   ];
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    SUDO_EDITOR = "nvim";
+  };
+  
+  nixpkgs.config.allowUnfree = true;
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -71,9 +78,6 @@ in {
   #
   #  /etc/profiles/per-user/nimainer/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
