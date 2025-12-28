@@ -5,7 +5,7 @@
   # stylix.image = "/home/maike/.config/nixos/ressources/wallpapers/1235167.jpg";
   stylix.targets = {
     # wezterm.enable = true;
-    alacritty.enable = true;
+    # alacritty.enable = true;
     # kitty.enable = true;
     ghostty.enable = true;
     # foot.enable = true;
@@ -49,13 +49,13 @@
     # feh.enable = true;
     # zellij.enable = true;
     # zathura.enable = true;
-    # waybar = {
+    #waybar = {
     #   enable = true;
     #   enableCenterBackColors = false;
     #   enableLeftBackColors = false;
     #   enableRightBackColors = false;
-    #   # font = "JetBrainsMono";
-    # };
+    #   font = "monospace";
+    #};
     # firefox = {
     #   enable = true;
     #   profileNames = []; #necessary

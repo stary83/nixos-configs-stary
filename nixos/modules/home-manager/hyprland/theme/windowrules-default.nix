@@ -94,10 +94,5 @@
 
  
 
-    layerrule = [
-      "blur,rofi"
-      "blur, waybar"
-      "blur, foot"
-    ];
   };
 }

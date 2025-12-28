@@ -152,7 +152,7 @@
       # $mainMod+Shift, W, exec, pkill -x rofi || $scrPath/swwwallselect.sh # launch wallpaper select menu
       # $mainMod, V, exec, pkill -x rofi || $scrPath/cliphist.sh c # launch clipboard
       # $mainMod+Shift, k, exec, $scrPath/keyboardswitch.sh # switch keyboard layout
-      "$mainMod+Shift, Z, exec, rofi -show run"
+      "$mainMod, Space, exec, wofi --show drun"
     ];
 
     bindel = [

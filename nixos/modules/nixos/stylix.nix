@@ -10,11 +10,13 @@
       gnome.enable = true;
       nixos-icons.enable = true;
       gtk.enable = true;
-      
+      qt.enable = true;
     };
-
-   
-
+    cursor = {
+	package = pkgs.numix-cursor-theme;
+        name = "Numix-Cursor-Dark";
+	size = 24;
+    };
   };
 
 

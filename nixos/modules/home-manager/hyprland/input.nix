@@ -2,7 +2,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     input = {
-      kb_layout = "eu";
+      kb_layout = "";
       kb_variant = "";
       kb_model = "";
       kb_rules = "";

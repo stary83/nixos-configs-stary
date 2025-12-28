@@ -21,29 +21,39 @@
     };
 
     swww.url = "github:LGFae/swww";
-    #sddm-sugar-candy-nix = {
-    #  url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
-    #  inputs.nixpkgs.follows = "nixpkgs"; # Optional, by default this flake follows nixpkgs-unstable.
-    #};
+    nixvim = { 
+        url = "github:nix-community/nixvim/nixos-25.05";
+        # url = "github:nix-community/nixvim";
+        # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+    matugen = {
+      url = "github:/InioX/Matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, ... }@inputs: 
+    let
+      host = "stary";
+    in {
+
+    homeManagerModules.${host} = ./modules/home-manager;
+    nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./hosts/default/configuration.nix
+        ./hosts/stary/configuration.nix
 	./modules/nixos
 	inputs.home-manager.nixosModules.default
 	{
 	  home-manager.backupFileExtension = "backup";
 	}
 	inputs.stylix.nixosModules.stylix
+	inputs.nixvim.nixosModules.nixvim
       ];
     };
-    
-    homeManagerModules.default = ./modules/home-manager;
-
-
 
   };
+
+
 }

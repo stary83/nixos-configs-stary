@@ -1,8 +1,8 @@
 { ... }: {
 
   wayland.windowManager.hyprland.settings = {
-    # source file is generated with wallust
-    source = "~/.config/hypr/colors-hyprland.conf";
+    # source file is generated with matugen
+    source = "colors.conf";
     "$term" = "ghostty"; 
     # "$term" = "foot";
     # "$term" = "alacritty";
