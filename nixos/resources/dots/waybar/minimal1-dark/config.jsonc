@@ -1,0 +1,158 @@
+{
+    "spacing": 4,
+    "height": 25,
+    "modules-left": [ "hyprland/workspaces" ],
+    "modules-center": [ "clock" ],
+    "modules-right": [ "tray", "pulseaudio", "network", "bluetooth", "group/hardware", "custom/power" ],
+    
+
+
+    "custom/power": {
+        "format" : "⏻ ",
+	"tooltip": false,
+	"on-click": "powerMenuMadeByMe"
+
+    },
+
+    "hyprland/workspaces": {
+      "on-scroll-up": "hyprctl dispatch workspace r-1",
+      "on-scroll-down": "hyprctl dispatch workspace r+1",
+      "on-click": "activate",
+      "active-only": true,
+      "all-outputs": false,
+      "persistent-workspaces": {
+        "*": 10
+      }
+    },
+
+
+    "tray": {
+      "spacing": 5
+    },
+
+
+    "clock": {
+      "format": "{:%I:%M %p}",
+      "format-alt": "{:%d-%m-%Y}",
+      "on-click-right": "gnome-clocks",
+      "tooltip": true,
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "calendar": {
+        "mode" : "month",
+        "mode-mon-col" : 3,
+        "on-scroll" : 1,
+	"on-right-click": "mode",
+        "format" : {
+          "months":     "<span color='#FFFFFF'>{}</span>",
+          "days":       "<span color='#9c9c9c'>{}</span>",
+          "weeks":      "<span color='#9c9c9c'>W{}</span>",
+          "weekdays":   "<span color='#FFFFFF'>{}</span>",
+          "today":      "<span color='#FFFFFF'><b>{}</b></span>"
+        }
+      },
+      "actions":  {
+        "on-right-click": "mode",
+        "on-scroll-up": "shift_down",
+        "on-scroll-down": "shift_up"
+      }
+    },
+
+
+    "cpu": {
+      "format": "[CPU:{usage}%]"
+    },
+    "memory": {
+      "format": "[MEM:{percentage}%]"
+    },
+    "disk": {
+      "format": "[DSK:{percentage_used}%]",
+      "path": "/"
+    },
+    "battery": {
+      "states": {
+        "warning": 30,
+        "critical": 20
+      },
+      "format": "{icon} {capacity}%",
+      "format-charging": "   {capacity}%",
+      "format-plugged": "  {capacity}%",
+      "format-alt": "{icon}  {time}",
+      "format-icons": [" ", " ", " ", " ", " "]
+    },
+
+    "group/hardware": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 300,
+        "children-class": "not-memory",
+        "transition-left-to-right": false
+      },
+      "modules": ["battery", "cpu", "memory", "disk"]
+    },
+
+
+    "pulseaudio": {
+      "states": {
+        "normal": 100,
+        "warning": 150,
+        "danger": 250
+      },
+      "scroll-step": 1,
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} {volume}% ",
+      "format-bluetooth-muted": " Muted ",
+      "format-muted": " Muted",
+      "format-source": "{volume}% ",
+      "format-source-muted": "",
+      "format-warning": "{icon} {volume}%   ",
+      "format-danger": "{icon} {volume}%   ",
+      "format-icons": {
+        "headphone": " ",
+        "hands-free": " ",
+        "headset": " ",
+        "phone": " ",
+        "portable": " ",
+        "car": " ",
+        "default": ["", " ", " ", " "]
+      },
+      "tooltip-format": "{desc}\n\nSpeaker: {volume}% 󰓃\nMic: {format_source}",
+      "on-click": "pavucontrol",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+
+    "custom/sidebar": {
+        "format": "󱗼",
+        "tooltip-format": "Sidebar",
+        "on-click": "swaync-client -t"
+    },
+
+
+    "bluetooth": {
+      "format": "",
+      "format-disabled": " ",
+      "format-off": " Off",
+      "interval": 30,
+      "on-click": "overskride",
+      "format-no-controller": "",
+      "tooltip-format": " {controller_alias}\n\n{num_connections} connected",
+      "tooltip-format-connected": " {controller_alias}\n\n{num_connections} connected",
+      "tooltip-format-enumerate-connected": " {device_alias}",
+      "tooltip-format-enumerate-connected-battery": " {device_alias}\t{device_battery_percentage}%"
+    },
+
+    "network": {
+      "format": "󰲛  Offline",
+      "format-wifi": " ",
+      "format-ethernet": "󰈀 󰈁",
+      "format-linked": "󰈀 󰈁",
+      "format-disconnected": "󰲛  Offline",
+      "tooltip-format": "󰈀  {ifname} via {gwaddri}",
+      "tooltip-format-wifi": "   Connected \n\nIP: {ipaddr}\nStrength: {signalStrength}%\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+      "tooltip-format-ethernet": "󰈀  {ifname}\n\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+      "tooltip-format-disconnected": "Disconnected",
+      "max-length": 50,
+      "on-click": "nm-connection-editor",
+      "on-click-right": "alacritty -T nmtui"
+    }
+
+}

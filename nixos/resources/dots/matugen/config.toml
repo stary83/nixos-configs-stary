@@ -10,18 +10,25 @@ input_path = './templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
 post_hook = 'pkill -SIGUSR2 waybar'
 
-[templates.rofi]
-input_path = './templates/rofi-colors.rasi'
-output_path = '~/.config/rofi/colors.rasi'
-
 [templates.dunst]
 input_path = './templates/dunstrc-colors'
 output_path = '~/.config/dunst/dunstrc'
-post_hook = 'pkill -SIGUSR2 dunst'
+post_hook = 'dunstctl reload'
 
 [templates.hyprland]
 input_path = './templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/colors.conf'
 post_hook = 'hyprctl reload'
 
+[templates.ghostty]
+input_path = './templates/ghostty'
+output_path = '~/.config/ghostty/themes/Matugen'
 
+[templates.rofi]
+input_path = './templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.niri]
+input_path = './templates/niri-colors.kdl'
+output_path = '~/.config/niri/colors.kdl'
+post_hook = 'niri msg action load-config-file'
