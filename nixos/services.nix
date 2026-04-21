@@ -1,6 +1,5 @@
-{ ... }: 
+{ pkgs, ... }: 
 {
-  
   services = {
     # Enable the Gnome Dekstop Environment & x11 windowing system
     desktopManager = {

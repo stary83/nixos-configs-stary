@@ -12,6 +12,7 @@
     ./hardware-configuration.nix
     ./device-specific.nix
     ../../nixos/networking.nix
+    ../../nixos/website.nix
     ../../nixos/hardware.nix
     ../../nixos/programs.nix
     ../../nixos/user.nix
@@ -22,6 +23,11 @@
     ../../nixos/virtual-machine.nix
     ../../nixos/packages/envpkgs.nix
     ../../nixos/packages/external.nix
+    # --------------------- nixpkgs overlays -------------------------
+    ../../nixos/packages/dnstt.nix
+    ../../nixos/packages/vaydns.nix
+    ../../nixos/packages/masterDnsVpn.nix
+    # ----------------------------------------------------------------
   ];
 
   # DO NOT EDIT

@@ -1,18 +1,7 @@
 { pkgs, lib, config, ... }: {
 
-  options = {
-    gpg.enable =
-      lib.mkEnableOption "enables gpg";
-  };
-
-  config = lib.mkIf config.gpg.enable {
     programs.gpg = {
       enable = true;
-      # Optional: Set a custom homedir if not using the default ~/.gnupg
-      # homedir = "${config.home.homeDirectory}/.gnupg";
-
-      # Optional: Custom GPG settings (these go into ~/.gnupg/gpg.conf)
-      # See https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html for all options
     };
 
     services.gpg-agent = {
@@ -30,5 +19,4 @@
         allow-loopback-pinentry
       '';
     };
-  };
 }

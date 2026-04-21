@@ -20,8 +20,8 @@
     ./powerMenuMadeByMe.nix
     ./applauncherMenuMadeByMe.nix
     ./niri.nix
+    # ./pass.nix
+    ./temp.nix
   ];
-  gpg.enable = true;
-  git.enable = true;
 
 }

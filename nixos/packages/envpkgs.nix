@@ -67,8 +67,8 @@ in {
     waywall # minecraft speedrunning utilitys
     lua
     xwayland-satellite # needed for niri, its how niri manages x11
-    xhost
     protonup-qt
+    zeal
 
 
     inputs.matugen.packages.${stdenv.hostPlatform.system}.default
@@ -90,6 +90,7 @@ in {
     htop
     ffmpeg
     neofetch
+    php
 
     gnome-tweaks 
     nautilus # file manager
@@ -120,9 +121,6 @@ in {
 
     deluge # torrent client
     #torrential # not in the 25.11 stable release right now
-
-    pass
-    qtpass
 
     python3
     python3Packages.pygobject3
