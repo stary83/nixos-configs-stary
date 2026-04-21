@@ -27,6 +27,7 @@
     ../../nixos/packages/dnstt.nix
     ../../nixos/packages/vaydns.nix
     ../../nixos/packages/masterDnsVpn.nix
+    ../../nixos/packages/findns.nix
     # ----------------------------------------------------------------
   ];
 
