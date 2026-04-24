@@ -11,6 +11,7 @@
   imports = [
     ./hardware-configuration.nix
     ./device-specific.nix
+    ../../nixos/security.nix
     ../../nixos/networking.nix
     ../../nixos/website.nix
     ../../nixos/hardware.nix
@@ -24,10 +25,11 @@
     ../../nixos/packages/envpkgs.nix
     ../../nixos/packages/external.nix
     # --------------------- nixpkgs overlays -------------------------
-    ../../nixos/packages/dnstt.nix
-    ../../nixos/packages/vaydns.nix
+    #../../nixos/packages/dnstt.nix
+    #../../nixos/packages/vaydns.nix
     ../../nixos/packages/masterDnsVpn.nix
     ../../nixos/packages/findns.nix
+    #../../nixos/packages/proxy-nix-toggle.nix
     # ----------------------------------------------------------------
   ];
 

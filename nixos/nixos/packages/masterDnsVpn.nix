@@ -13,7 +13,7 @@
         src = final.fetchFromGitHub {
           owner = "masterking32";
           repo = "MasterDnsVPN";
-          rev = "aff170eee0ad829519f60c56432e2f45d0dacc11";  # latest as of April 2026 (pin this)
+          rev = "f466bf8c408036c604c38ffdd767dea9dde986b9";  # latest as of April 2026 (pin this)
           sha256 = "sha256-7uLxqvsd0e0LhyI0MHKYwKjqebhL+LYVbJ9SZ7boarY="; # ← will be fixed on first build
         };
 

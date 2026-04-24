@@ -14,6 +14,7 @@
     wireguard-tools
     libproxy
     xray
+    v2raya
     # nebula
   ];
 
@@ -26,11 +27,18 @@
       tunMode.enable = true;
       tunMode.setuid = true;
     };
+    proxychains = {
+      
+
+    };
   };
   services = {
     strongswan = {
       enable = true;
     };
+    v2raya = {
+      enable = true;
+    }; 
   };
 
   environment.etc."ipsec.secrets".text = ''
@@ -41,7 +49,6 @@
 
   networking = {
     hostName = "StarConst"; # Define your hostname.
-
     networkmanager = {
       enable = true;
       plugins = with pkgs; [
