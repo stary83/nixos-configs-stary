@@ -29,6 +29,7 @@
     #../../nixos/packages/vaydns.nix
     ../../nixos/packages/masterDnsVpn.nix
     ../../nixos/packages/findns.nix
+    ../../nixos/packages/anyportal.nix
     #../../nixos/packages/proxy-nix-toggle.nix
     # ----------------------------------------------------------------
   ];

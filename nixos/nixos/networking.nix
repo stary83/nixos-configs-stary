@@ -1,6 +1,8 @@
 { pkgs, ... }: 
 {
-  
+  imports = [
+    ./proxychains.nix
+  ]; 
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
     libreswan
@@ -14,6 +16,7 @@
     wireguard-tools
     libproxy
     xray
+    sing-box
     v2raya
     # nebula
   ];
@@ -27,17 +30,13 @@
       tunMode.enable = true;
       tunMode.setuid = true;
     };
-    proxychains = {
-      
-
-    };
   };
   services = {
     strongswan = {
       enable = true;
     };
     v2raya = {
-      enable = true;
+      # enable = true;
     }; 
   };
 
