@@ -11,9 +11,10 @@
   imports = [
     ./hardware-configuration.nix
     ./device-specific.nix
+    ../../nixos/flatpak.nix
     ../../nixos/security.nix
     ../../nixos/networking.nix
-    ../../nixos/website.nix
+    #../../nixos/website.nix
     ../../nixos/hardware.nix
     ../../nixos/programs.nix
     ../../nixos/user.nix
@@ -28,9 +29,10 @@
     #../../nixos/packages/dnstt.nix
     #../../nixos/packages/vaydns.nix
     ../../nixos/packages/masterDnsVpn.nix
-    ../../nixos/packages/findns.nix
-    ../../nixos/packages/anyportal.nix
-    #../../nixos/packages/proxy-nix-toggle.nix
+    ../../nixos/packages/stormdnsclient.nix
+    #../../nixos/packages/findns.nix
+    #../../nixos/packages/anyportal.nix
+    #../../nixos/packages/kevinnet-dns.nix
     # ----------------------------------------------------------------
   ];
 

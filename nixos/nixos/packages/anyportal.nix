@@ -16,6 +16,20 @@
         };
 
         nativeBuildInputs = [ final.autoPatchelfHook final.unzip ];
+        
+        buildInputs = with prev; [
+          cairo
+          gdk-pixbuf
+          glib
+          gtk3
+          zlib
+          pango
+          harfbuzz
+          atk
+          libayatana-appindicator
+          libnotify
+          xdg-utils
+        ];
 
         # The zip likely contains the executable directly (no top‑level folder)
         # so we set sourceRoot to the current directory to keep things simple.

@@ -2,6 +2,9 @@
 {
   imports = [
     ./proxychains.nix
+    ./privoxy.nix
+    ./certificates.nix
+    #./haproxy.nix
   ]; 
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
@@ -45,9 +48,24 @@
   '';
 
   environment.etc."strongswan.conf".text = "";
+  
 
   networking = {
     hostName = "StarConst"; # Define your hostname.
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
+      allowedTCPPortRanges = [
+        { 
+          from = 17994;
+	  to = 18005;
+	}
+      ];
+      allowedUDPPortRanges = [];
+
+    };
+
     networkmanager = {
       enable = true;
       plugins = with pkgs; [

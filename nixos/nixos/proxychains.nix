@@ -16,7 +16,7 @@
       
       # === SOCKS5 Proxy (MasterDnsVPN on port 18000) ===
       # Uncomment the next line to use SOCKS5:
-      socks5 127.0.0.1 18000
+      socks5 127.0.0.1 18004
       
       # === HTTP Proxy (if you have one on port 18001) ===
       # Uncomment the next line INSTEAD to use HTTP:

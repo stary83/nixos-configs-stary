@@ -31,9 +31,13 @@
       url = "github:/InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak ={
+      url = "github:gmodena/nix-flatpak";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nix-flatpak, ... }@inputs: 
     let
       host = "stary";
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -60,6 +64,7 @@
             "flakes"
           ];
         }
+	nix-flatpak.nixosModules.nix-flatpak
 	inputs.stylix.nixosModules.stylix
 	inputs.nixvim.nixosModules.nixvim
         ./hosts/${host}/configuration.nix

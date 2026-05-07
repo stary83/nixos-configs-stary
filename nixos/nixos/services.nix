@@ -1,7 +1,6 @@
 { pkgs, ... }: 
 {
   services = {
-    flatpak.enable = true;
     # Enable the Gnome Dekstop Environment & x11 windowing system
     desktopManager = {
       gnome.enable = true;

@@ -70,7 +70,6 @@ in {
     protonup-qt
     zeal
 
-
     inputs.matugen.packages.${stdenv.hostPlatform.system}.default
     #greetd.greetd
     #greetd.tuigreet
@@ -91,6 +90,8 @@ in {
     ffmpeg
     neofetch
     php
+    tmux
+    dig
 
     gnome-tweaks 
     nautilus # file manager
@@ -99,6 +100,8 @@ in {
     google-chrome
     neovim
     yt-dlp
+    tdl # telegram download by id, must login first
+    deno
     gnome-keyring
     libsecret
     jdk
