@@ -11,28 +11,27 @@
   imports = [
     ./hardware-configuration.nix
     ./device-specific.nix
+    ../../nixos/graphics.nix
+    ../../nixos/boot.nix
+    ../../nixos/nix.nix
     ../../nixos/flatpak.nix
     ../../nixos/security.nix
     ../../nixos/networking.nix
-    #../../nixos/website.nix
+    # ../../nixos/website.nix
     ../../nixos/hardware.nix
     ../../nixos/programs.nix
-    ../../nixos/user.nix
+    ../../nixos/users.nix
     ../../nixos/services.nix
     ../../nixos/general-settings.nix
     ../../nixos/nixvim.nix
     ../../nixos/stylix.nix
     ../../nixos/virtual-machine.nix
     ../../nixos/packages/envpkgs.nix
-    ../../nixos/packages/external.nix
+    ../../nixos/packages/overlaysforpkgsthatarentworking.nix
+    ../../nixos/podman.nix
+    ../../nixos/nix-ld-alien.nix
     # --------------------- nixpkgs overlays -------------------------
-    #../../nixos/packages/dnstt.nix
-    #../../nixos/packages/vaydns.nix
-    ../../nixos/packages/masterDnsVpn.nix
-    ../../nixos/packages/stormdnsclient.nix
-    #../../nixos/packages/findns.nix
-    #../../nixos/packages/anyportal.nix
-    #../../nixos/packages/kevinnet-dns.nix
+    # currently all are network related and imported into networking.nix
     # ----------------------------------------------------------------
   ];
 

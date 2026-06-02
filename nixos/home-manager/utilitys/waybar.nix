@@ -5,7 +5,7 @@
     enable = true;
     systemd = {
       enable = false;
-      target = "graphical-session.target";
+      targets = "graphical-session.target";
     };
   };
   home.file.".config/waybar/config.jsonc" = {

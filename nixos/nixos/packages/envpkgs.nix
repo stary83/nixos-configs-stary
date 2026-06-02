@@ -1,10 +1,9 @@
 { pkgs, inputs, ... }:
 
 let
-  unstable = inputs.nixpkgsUnstable.legacyPackages.x86_64-linux;
+  unstable = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
 
 in {
-
   environment.gnome.excludePackages = with pkgs; [
     orca
     evince
@@ -56,6 +55,14 @@ in {
   ];
   
   environment.systemPackages = with pkgs; [
+    # --- unstable ------------------------------------
+    unstable.ghostty
+    unstable.prismlauncher
+    # -------------------------------------------------
+    inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
+    inputs.matugen.packages.${stdenv.hostPlatform.system}.default
+    inputs.matugen.packages.${stdenv.hostPlatform.system}.default
+
     brightnessctl # allows to control brightness
     playerctl # allows for video/audio playback control
     wl-clipboard # clipboard manager
@@ -70,7 +77,9 @@ in {
     protonup-qt
     zeal
 
-    inputs.matugen.packages.${stdenv.hostPlatform.system}.default
+    nuget-to-json
+    dotnetCorePackages.sdk_8_0
+
     #greetd.greetd
     #greetd.tuigreet
      
@@ -88,7 +97,6 @@ in {
     vlc
     htop
     ffmpeg
-    neofetch
     php
     tmux
     dig
@@ -108,8 +116,6 @@ in {
     vscode
     alacritty
     libgcc
-    unstable.ghostty
-    prismlauncher
     gcc
     unrar
     rar

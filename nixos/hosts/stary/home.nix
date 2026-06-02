@@ -4,6 +4,7 @@
 
 {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
 
   imports = [
     ../../home-manager/default.nix

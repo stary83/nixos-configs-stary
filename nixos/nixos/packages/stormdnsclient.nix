@@ -3,39 +3,44 @@
 {
   nixpkgs.overlays = [
     (final: prev: {
-      stormdns = prev.stdenv.mkDerivation rec {
+      # ──────────────────────────────────────────────────────────────
+      # StormDNS[](https://github.com/nullroute1970/StormDNS)
+      # ──────────────────────────────────────────────────────────────
+      stormdns = final.buildGoModule {
         pname = "stormdns";
-        version = "2026.04.26.153956-15aedd9";
+        version = "v2026.04.12.234117-978faee";
 
-        src = prev.fetchurl {
-          url = "https://github.com/nullroute1970/StormDNS/releases/download/v${version}/StormDNS_Client_Linux_AMD64.tar.gz";
-          hash = "sha256-VmBi6VV4L3vsDrJPw1OIm5C+ZBYLn0VcBkVhzufu/F8=";
+        src = final.fetchFromGitHub {
+          owner = "nullroute1970";
+          repo = "StormDNS";
+          rev = "87348df5b11f9e490262a713ca268734007af44f";  # latest as of 19 may 2026
+          sha256 = "sha256-gvZrC/Ptub4HGRFAedfi7xlSqpzNxy453vz1OUOaU2o="; 
         };
 
-        sourceRoot = ".";
+        subPackages = [ "cmd/client" "cmd/server" ];
 
-        # The archive contains a single binary named "StormDNS_Client"
-        installPhase = ''
-          runHook preInstall
-          mkdir -p $out/bin
-          cp StormDNS_Client_Linux_AMD64_v${version} $out/bin/stormdns
-          chmod +x $out/bin/stormdns
-          runHook postInstall
+        # Standard for this clean Go project (no vendor/ folder)
+        vendorHash = "sha256-EterKjJLXF+xu5elv21uoKZlOoUk4MZsvTavdj5UWx4=";
+
+        doCheck = false;   # most DNS-tunnel tools fail tests in Nix sandbox
+
+        # make the binaries have clean names
+        postInstall = ''
+          mv $out/bin/client $out/bin/stormdns-client 2>/dev/null || true
+          mv $out/bin/server $out/bin/stormdns-server 2>/dev/null || true
         '';
 
-        meta = with prev.lib; {
-          description = "StormDNS client for encrypted DNS";
+        meta = {
+          description = "fork of masterdns supposedly optimized for pc";
           homepage = "https://github.com/nullroute1970/StormDNS";
-          license = licenses.gpl3Only;
-          maintainers = with maintainers; [ ];
-          platforms = [ "x86_64-linux" ];
-          mainProgram = "stormdns";
+          license = final.lib.licenses.mit; 
+          platforms = final.lib.platforms.linux;
+          mainProgram = "stormdns-client";
         };
       };
+
+
     })
   ];
-
-  environment.systemPackages = with pkgs; [
-    stormdns
-  ];
 }
+

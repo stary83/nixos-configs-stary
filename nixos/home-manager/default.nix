@@ -22,6 +22,7 @@
     ./niri.nix
     # ./pass.nix
     ./temp.nix
+    ./distrobox.nix
   ];
 
 }

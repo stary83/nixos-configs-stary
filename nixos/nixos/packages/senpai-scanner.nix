@@ -4,42 +4,41 @@
   nixpkgs.overlays = [
     (final: prev: {
       # ──────────────────────────────────────────────────────────────
-      # 1. findns (pre-built binary from GitHub Releases)
+      # SenPaiScanner – pre-built binary from GitHub Releases
       # ──────────────────────────────────────────────────────────────
-      findns = final.stdenv.mkDerivation rec {
-        pname = "findns";
-        version = "0.2.2.1";
+      senpai-scanner = final.stdenv.mkDerivation rec {
+        pname = "senpai-scanner";
+        version = "0.5.0";
 
         src = final.fetchurl {
-          url = "https://github.com/SamNet-dev/findns/releases/download/v${version}/findns-linux-amd64";
-          hash = "sha256-FlOEMeVQjKX5APeNoZwln4reath2uHAPPMENM/6tdDQ=";
+          url = "https://github.com/MatinSenPai/SenPaiScanner/releases/download/v${version}/senpaiscanner-linux-amd64";
+          hash = "sha256-WxcxRitonB2k05GZtGOrusmY/IVCxdA3XF+YzxafS0I="; # ← REPLACE THIS
         };
 
-        # We're installing a pre-built binary, so no build phase needed
         dontUnpack = true;
         dontBuild = true;
 
         installPhase = ''
           runHook preInstall
           mkdir -p $out/bin
-          cp $src $out/bin/findns
-          chmod +x $out/bin/findns
+          cp $src $out/bin/senpai-scanner
+          chmod +x $out/bin/senpai-scanner
           runHook postInstall
         '';
 
         meta = with final.lib; {
-          description = "DNS tunnel client and resolver testing tool";
-          homepage = "https://github.com/SamNet-dev/findns";
-          license = licenses.gpl3Only;
+          description = "SenPaiScanner – a network scanning tool";
+          homepage = "https://github.com/MatinSenPai/SenPaiScanner";
+          license = licenses.mit; # check actual license
           maintainers = with maintainers; [ ];
           platforms = [ "x86_64-linux" ];
-          mainProgram = "findns";
+          mainProgram = "senpai-scanner";
         };
       };
     })
   ];
 
   environment.systemPackages = with pkgs; [
-    findns
+    senpai-scanner
   ];
 }

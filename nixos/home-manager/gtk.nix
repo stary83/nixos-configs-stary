@@ -1,10 +1,7 @@
 { pkgs, ... }: {
   gtk = {
     enable = true;
-    theme = {
-      name = "Gruvbox-Dark";
-      package = pkgs.gruvbox-gtk-theme;
-    };
+    theme = null;
   };
 
   #home.file.".config/gtk-2.0" = {

@@ -1,27 +1,45 @@
-{ pkgs, ... }: 
-{
+{ inputs, pkgs, ... }:
+let
+  unstable = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
+in {
   imports = [
     ./proxychains.nix
     ./privoxy.nix
     ./certificates.nix
-    #./haproxy.nix
-  ]; 
+    # --------------------- nixpkgs overlays -------------------------
+    packages/masterDnsVpn.nix
+    packages/stormdnsclient.nix
+    packages/xray.nix
+    packages/sni-spoofing-go.nix
+    packages/zerodpi.nix
+    # packages/psiphon.nix
+    packages/senpai-scanner.nix
+    # packages/windscribe.nix
+    # ----------------------------------------------------------------
+  ];
+
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
     libreswan
     strongswan
     xl2tpd
-    linux-wifi-hotspot
+    linux-wifi-hotspot # the cli for this provides the create_ap command
     haveged # wifi hotspot says this is needed
     openvpn
     # smartdns
     sstp
     wireguard-tools
     libproxy
-    xray
+    # temp-latest-stable.xray
+    xray-core # xrays latest version packaged by me
     sing-box
-    v2raya
+    unstable.v2ray
+    unstable.v2rayn
+    tproxy
+    masterDnsVpn
+    stormdns
     # nebula
+    sni-spoofing-go
   ];
 
   programs = { 
@@ -38,9 +56,6 @@
     strongswan = {
       enable = true;
     };
-    v2raya = {
-      # enable = true;
-    }; 
   };
 
   environment.etc."ipsec.secrets".text = ''
@@ -58,8 +73,12 @@
       allowedUDPPorts = [];
       allowedTCPPortRanges = [
         { 
-          from = 17994;
-	  to = 18005;
+          from = 18000;
+	  to = 18010;
+	}
+        {
+          from = 19000;
+	  to = 19010;
 	}
       ];
       allowedUDPPortRanges = [];

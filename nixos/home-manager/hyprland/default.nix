@@ -1,6 +1,7 @@
 {...}:
 {
   wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.configType = "hyprlang";
   imports = [
     ./bind.nix
     ./input.nix

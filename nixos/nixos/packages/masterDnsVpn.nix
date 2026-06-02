@@ -13,19 +13,18 @@
         src = final.fetchFromGitHub {
           owner = "masterking32";
           repo = "MasterDnsVPN";
-          rev = "f466bf8c408036c604c38ffdd767dea9dde986b9";  # latest as of April 2026 (pin this)
-          sha256 = "sha256-7uLxqvsd0e0LhyI0MHKYwKjqebhL+LYVbJ9SZ7boarY="; # ← will be fixed on first build
+          rev = "27c7e11ce9eb51d7db36b34188502e524a3184db";  # latest as of 19 may 2026
+          sha256 = "sha256-WEND1op/Pdc2nYbFfZoIhi9jzA8lTI8Ib4ltNYQ9hkY="; 
         };
 
-        # Exact build targets from the official README
         subPackages = [ "cmd/client" "cmd/server" ];
 
         # Standard for this clean Go project (no vendor/ folder)
-        vendorHash = "sha256-X0TpheIBmhT0tbNf5FEnUW1faIgY2oTxMfoRUDTjn34=";   # ← Nix will give you the real one on first build
+        vendorHash = "sha256-X0TpheIBmhT0tbNf5FEnUW1faIgY2oTxMfoRUDTjn34=";
 
         doCheck = false;   # most DNS-tunnel tools fail tests in Nix sandbox
 
-        # Optional: make the binaries have clean names (recommended)
+        # make the binaries have clean names
         postInstall = ''
           mv $out/bin/client $out/bin/masterdnsvpn-client 2>/dev/null || true
           mv $out/bin/server $out/bin/masterdnsvpn-server 2>/dev/null || true
@@ -34,7 +33,7 @@
         meta = {
           description = "Advanced DNS tunneling VPN (optimized beyond DNSTT)";
           homepage = "https://github.com/masterking32/MasterDnsVPN";
-          license = final.lib.licenses.unfree;  # check LICENSE if you need strict licensing
+          license = final.lib.licenses.unfree; 
           platforms = final.lib.platforms.linux;
           mainProgram = "masterdnsvpn-client";
         };
@@ -43,8 +42,5 @@
 
     })
   ];
-
-  environment.systemPackages = with pkgs; [
-    masterDnsVpn
-  ];
 }
+
