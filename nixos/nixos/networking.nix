@@ -15,6 +15,8 @@ in {
     # packages/psiphon.nix
     packages/senpai-scanner.nix
     # packages/windscribe.nix
+    packages/onionhop.nix
+    packages/v2rayn.nix
     # ----------------------------------------------------------------
   ];
 
@@ -34,12 +36,17 @@ in {
     xray-core # xrays latest version packaged by me
     sing-box
     unstable.v2ray
-    unstable.v2rayn
+    # unstable.v2rayn
+    v2rayn # currently using my own overlay with the latest version
     tproxy
     masterDnsVpn
     stormdns
     # nebula
     sni-spoofing-go
+    # cloudflare-warp
+    proton-vpn
+    amneziawg-go
+    amnezia-vpn
   ];
 
   programs = { 
@@ -51,6 +58,7 @@ in {
       tunMode.enable = true;
       tunMode.setuid = true;
     };
+    amnezia-vpn.enable = true;
   };
   services = {
     strongswan = {

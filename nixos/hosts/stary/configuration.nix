@@ -29,6 +29,7 @@
     ../../nixos/packages/envpkgs.nix
     ../../nixos/packages/overlaysforpkgsthatarentworking.nix
     ../../nixos/podman.nix
+    ../../nixos/docker.nix
     ../../nixos/nix-ld-alien.nix
     # --------------------- nixpkgs overlays -------------------------
     # currently all are network related and imported into networking.nix

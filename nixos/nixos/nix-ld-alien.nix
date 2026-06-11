@@ -26,7 +26,14 @@
     libxkbcommon.out
     pcre2.out 
     zstd.out
-    # --- v2rayNG --------------------------------------------------
-
+    # --- v2rayN ---------------------------------------------------
+    glibc
+    stdenv.cc.cc.lib
+    icu               
+    libGL
+    libX11
+    libxcb
+    fontconfig
+    freetype
   ];
 }

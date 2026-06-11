@@ -12,7 +12,7 @@
 
         src = final.fetchurl {
           url = "https://github.com/MatinSenPai/SenPaiScanner/releases/download/v${version}/senpaiscanner-linux-amd64";
-          hash = "sha256-WxcxRitonB2k05GZtGOrusmY/IVCxdA3XF+YzxafS0I="; # ← REPLACE THIS
+          hash = "sha256-WxcxRitonB2k05GZtGOrusmY/IVCxdA3XF+YzxafS0I=";
         };
 
         dontUnpack = true;
@@ -29,7 +29,7 @@
         meta = with final.lib; {
           description = "SenPaiScanner – a network scanning tool";
           homepage = "https://github.com/MatinSenPai/SenPaiScanner";
-          license = licenses.mit; # check actual license
+          license = licenses.mit;
           maintainers = with maintainers; [ ];
           platforms = [ "x86_64-linux" ];
           mainProgram = "senpai-scanner";

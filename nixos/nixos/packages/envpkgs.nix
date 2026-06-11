@@ -59,7 +59,7 @@ in {
     unstable.ghostty
     unstable.prismlauncher
     # -------------------------------------------------
-    inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
+    inputs.prismlauncher.packages.${stdenv.hostPlatform.system}.prismlauncher
     inputs.matugen.packages.${stdenv.hostPlatform.system}.default
     inputs.matugen.packages.${stdenv.hostPlatform.system}.default
 
@@ -100,6 +100,7 @@ in {
     php
     tmux
     dig
+    xhost
 
     gnome-tweaks 
     nautilus # file manager

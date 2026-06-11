@@ -1,59 +1,100 @@
 { pkgs, ... }:
-
-let
-  version = "7.22.3";
-  v2rayn-unwrapped = pkgs.stdenv.mkDerivation {
-    pname = "v2rayn-unwrapped";
-    inherit version;
-    src = pkgs.fetchurl {
-      url = "https://github.com/2dust/v2rayN/releases/download/${version}/v2rayN-linux-64.zip";
-      hash = "sha256-QFyL+kR3S50rj77I3CY/xNLDqe82lptcSHOiqO5JRcc=";
-    };
-    nativeBuildInputs = [ pkgs.unzip ];
-    sourceRoot = "v2rayN-linux-64";
-    installPhase = ''
-      runHook preInstall
-      mkdir -p $out/opt/v2rayn
-      cp -r . $out/opt/v2rayn/
-      chmod +x $out/opt/v2rayn/v2rayN
-      runHook postInstall
-    '';
-  };
-in
 {
   nixpkgs.overlays = [
     (final: prev: {
-      v2rayn = final.buildFHSEnv {
-        name = "v2rayn-${version}";
+      # ──────────────────────────────────────────────────────────────
+      # v2rayN (Latest version - prebuilt Linux binary)
+      # ──────────────────────────────────────────────────────────────
+      v2rayn = final.stdenv.mkDerivation rec {
+        pname = "v2rayN";
+        version = "7.22.5";
 
-        # Run the real binary directly – no need for a `cd` prefix
-        runScript = "${v2rayn-unwrapped}/opt/v2rayn/v2rayN";
+        src = final.fetchurl {
+          url = "https://github.com/2dust/v2rayN/releases/download/${version}/v2rayN-linux-64.zip";
+          sha256 = "sha256-PZg9vQdqSn2Y/JYGtFoR6vQb2rjF1sG+4IfWwjqilj0=";
+        };
 
-        targetPkgs = (ps: with ps; [
-          bash
-          coreutils
-          which
-          iproute2
-          iptables
-          polkit
-          sudo
-          xorg.libX11
-          xorg.libXrandr
-          xorg.libXi
+        dontUnpack = true;
+
+        nativeBuildInputs = with final; [
+          unzip
+          makeWrapper
+          autoPatchelfHook
+	  copyDesktopItems
+        ];
+
+        buildInputs = with final; [
+	  stdenv.cc.cc.lib
+          gtk3
+          glib
           libGL
-          libxkbcommon
           fontconfig
+          libX11
+          libXrandr
+          libXi
+          libXcursor
+          libXext
+          libICE
+          libSM
           icu
-          zlib
           openssl
-          lttng-ust_2_12
-          krb5
-          stdenv.cc.cc.lib
-        ]);
+          libpulseaudio
+          dbus
+          libsecret
+        ];
+        
+	installPhase = ''
+          runHook preInstall
+
+          mkdir -p $out/bin $out/share/v2rayN $out/share/icons/hicolor/256x256/apps
+
+          # Extract into a temporary directory
+          unzip $src -d temp-extract
+
+          # The actual content is inside v2rayN-linux-64/
+          cp -r temp-extract/v2rayN-linux-64/* $out/share/v2rayN/
+
+          # Make main binaries executable
+          chmod +x $out/share/v2rayN/v2rayN
+          chmod +x $out/share/v2rayN/bin/xray/xray
+          chmod +x $out/share/v2rayN/bin/sing_box/sing-box
+          chmod +x $out/share/v2rayN/bin/mihomo/mihomo
+
+          # Install icon
+          install -Dm644 $out/share/v2rayN/v2rayN.png $out/share/icons/hicolor/256x256/apps/v2rayN.png
+
+          # Create wrapper
+	  makeWrapper $out/share/v2rayN/v2rayN $out/bin/v2rayN \
+            --prefix LD_LIBRARY_PATH : "${final.lib.makeLibraryPath buildInputs}" \
+            --chdir $out/share/v2rayN \
+            # --set DOTNET_GCHeapHardLimit 0x10000000
+
+          runHook postInstall
+        '';
+
+	desktopItems = [
+          (final.makeDesktopItem {
+            name = "v2rayN";
+            exec = "v2rayN";
+            icon = "v2rayN";
+            desktopName = "v2rayN";
+            genericName = "Proxy Client";
+            comment = "Powerful GUI client for Xray / sing-box / mihomo";
+            categories = [ "Network" "Utility" ];
+            terminal = false;
+            startupWMClass = "v2rayN";
+          })
+        ];
+
+        meta = {
+          description = "v2rayN - Powerful GUI client for Xray / sing-box";
+          homepage = "https://github.com/2dust/v2rayN";
+          license = final.lib.licenses.gpl3Plus;
+          platforms = [ "x86_64-linux" ];
+          mainProgram = "v2rayN";
+        };
       };
     })
   ];
 
-  environment.systemPackages = with pkgs; [ v2rayn ];
-  boot.kernelModules = [ "tun" ];
 }
