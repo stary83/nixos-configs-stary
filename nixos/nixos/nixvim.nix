@@ -4,13 +4,13 @@
     enable = true;
     defaultEditor =  true;
     colorschemes = {
-      gruvbox = {
-        lazyLoad = {
-          enable = true;
-	  settings = {};
-	};
-      luaConfig = {};
-      };
+      gruvbox.enable = true;
+    };
+    plugins = {
+      # nvim-tree = {
+      #  enable = true;
+	    #  openOnSetup = true;
+      # };
     };
 
   };

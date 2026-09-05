@@ -5,19 +5,21 @@
     desktopManager = {
       gnome.enable = true;
     };
+
     displayManager = {
       gdm.enable = true;
       sddm.wayland.enable = true;
       defaultSession = "niri";
     };
+
     xserver = {
       enable = true;
       xkb = {
-        layout = "us"; #add ir for farsi
+        layout = "us"; # add ir for farsi
         variant = "";
-        #options = "grp:alt_space_toggle";
+        # options = "grp:alt_space_toggle";
       };
-      #libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+      # libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
     };
 
     # Enable CUPS to print documents.

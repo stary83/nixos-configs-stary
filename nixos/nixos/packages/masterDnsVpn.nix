@@ -40,5 +40,9 @@
 
     })
   ];
+  
+  environment.systemPackages = with pkgs; [
+    masterDnsVpn
+  ];
 }
 

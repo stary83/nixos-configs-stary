@@ -11,7 +11,7 @@
     ./gnome.nix
     ./ghostty.nix
     ./rofi.nix
-    ./wofi.nix
+    # ./wofi.nix
     ./dunst.nix
     ./fastfetch.nix
     ./matugen.nix
@@ -21,8 +21,10 @@
     ./applauncherMenuMadeByMe.nix
     ./niri.nix
     # ./pass.nix
-    ./temp.nix
     ./distrobox.nix
+    ./dns-switcher.nix
+    ./waywall.nix
+    ./thunderbird.nix
   ];
 
 }

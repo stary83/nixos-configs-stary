@@ -366,7 +366,7 @@ binds {
     // Mod+KP_ADD hotkey-overlay-title="Calculator"               { spawn "galculator"; }
 
     // Scripts
-    // Ctrl+Alt+W    { spawn "waybar";                     }
+    Ctrl+Alt+W    { spawn "waybar";                     }
     Mod+Escape    { spawn "hyprlock";                   }
     Mod+Space     { spawn "alMenuMadeByMe";             }
     // Mod+V      { spawn "~/scripts/rofi-clipboard";   }

@@ -1,9 +1,9 @@
 {
     "spacing": 4,
     "height": 25,
-    "modules-left": [ "hyprland/workspaces" ],
+    "modules-left": [ ],
     "modules-center": [ "clock" ],
-    "modules-right": [ "tray", "pulseaudio", "network", "bluetooth", "group/hardware", "custom/power" ],
+    "modules-right": [ "custom/dns", "tray", "pulseaudio", "network", "bluetooth", "group/hardware", "custom/power" ],
     
 
 
@@ -11,7 +11,12 @@
         "format" : "⏻ ",
 	"tooltip": false,
 	"on-click": "powerMenuMadeByMe"
-
+    },
+    
+    "custom/dns": {
+        "format": "DNS",
+	"tooltip": false,
+	"on-click": "dns-switcher"
     },
 
     "hyprland/workspaces": {

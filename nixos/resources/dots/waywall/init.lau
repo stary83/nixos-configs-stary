@@ -1,0 +1,54 @@
+local helpers = require("waywall.helpers")
+
+-- ============================================================
+-- Resolution presets for the wide / slim macros.
+-- Change these to whatever resolutions you actually use.
+-- ============================================================
+local WIDE = { 1280, 800 }  -- example: 16:10 wide window
+local SLIM = { 1152, 648 }  -- example: 16:9 leaderboard-legal
+
+-- waywall.exec does NOT expand "~", so build the path from $HOME
+-- (or just hardcode it, e.g. "/home/yourname/Desktop/a.jar")
+local NBB_JAR = os.getenv("HOME") .. "/Desktop/a.jar"
+
+local config = {
+    input = {
+        layout = "us",
+        remaps = {},
+        repeat_rate = -1,
+        repeat_delay = -1,
+        sensitivity = 1.0,
+        confine_pointer = false,
+    },
+
+    actions = {
+        -- Launch Ninjabrain Bot inside waywall
+        ["Ctrl-Shift-N"] = function()
+            waywall.exec("java -jar " .. NBB_JAR)
+        end,
+
+        -- Show/hide floating windows (Ninjabrain Bot spawns hidden)
+        ["Ctrl-Shift-B"] = helpers.toggle_floating,
+
+        -- Wide / slim resolution macros (press again to toggle back)
+        ["Ctrl-Shift-W"] = helpers.toggle_res(WIDE[1], WIDE[2]),
+        ["Ctrl-Shift-S"] = helpers.toggle_res(SLIM[1], SLIM[2]),
+
+        -- Reset the Minecraft window to fill the waywall window
+        ["Ctrl-Shift-R"] = function()
+            waywall.set_resolution(0, 0)
+        end,
+
+        -- Fullscreen
+        ["F11"] = function()
+            waywall.toggle_fullscreen()
+        end,
+    },
+
+    theme = {
+        -- Optional: pin Ninjabrain Bot to a corner
+        -- ninb_anchor = { pos = "top_right" },
+    },
+}
+
+return config

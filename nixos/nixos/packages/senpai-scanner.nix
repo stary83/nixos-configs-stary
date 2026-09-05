@@ -8,11 +8,11 @@
       # ──────────────────────────────────────────────────────────────
       senpai-scanner = final.stdenv.mkDerivation rec {
         pname = "senpai-scanner";
-        version = "0.5.0";
+        version = "0.7.1";
 
         src = final.fetchurl {
           url = "https://github.com/MatinSenPai/SenPaiScanner/releases/download/v${version}/senpaiscanner-linux-amd64";
-          hash = "sha256-WxcxRitonB2k05GZtGOrusmY/IVCxdA3XF+YzxafS0I=";
+          hash = "sha256-l5PkiDFli9UanhT6oBXz7hNK+OFzSRPP2DpKHXWgHtk=";
         };
 
         dontUnpack = true;

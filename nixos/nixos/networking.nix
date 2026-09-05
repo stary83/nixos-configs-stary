@@ -9,14 +9,17 @@ in {
     # --------------------- nixpkgs overlays -------------------------
     packages/masterDnsVpn.nix
     packages/stormdnsclient.nix
+    # packages/vaydns.nix 
     packages/xray.nix
-    packages/sni-spoofing-go.nix
-    packages/zerodpi.nix
+    # packages/sni-spoofing-go.nix
+    # packages/zerodpi.nix
     # packages/psiphon.nix
     packages/senpai-scanner.nix
     # packages/windscribe.nix
     packages/onionhop.nix
-    packages/v2rayn.nix
+    # packages/v2rayn.nix
+    packages/aether.nix
+    packages/dns-hop.nix
     # ----------------------------------------------------------------
   ];
 
@@ -35,18 +38,15 @@ in {
     # temp-latest-stable.xray
     xray-core # xrays latest version packaged by me
     sing-box
-    unstable.v2ray
     # unstable.v2rayn
-    v2rayn # currently using my own overlay with the latest version
+    # v2rayn 
     tproxy
-    masterDnsVpn
-    stormdns
     # nebula
-    sni-spoofing-go
+    
     # cloudflare-warp
-    proton-vpn
-    amneziawg-go
-    amnezia-vpn
+    # proton-vpn
+    # amneziawg-go
+    # amnezia-vpn
   ];
 
   programs = { 
@@ -73,21 +73,27 @@ in {
   environment.etc."strongswan.conf".text = "";
   
 
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
+
   networking = {
     hostName = "StarConst"; # Define your hostname.
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [ ];
+      allowedUDPPorts = [ ];
       allowedTCPPortRanges = [
         { 
           from = 18000;
-	  to = 18010;
-	}
+	        to = 18010;
+	      }
         {
           from = 19000;
-	  to = 19010;
-	}
+	        to = 19010;
+	      }
       ];
       allowedUDPPortRanges = [];
 

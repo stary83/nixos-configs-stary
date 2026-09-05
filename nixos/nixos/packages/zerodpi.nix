@@ -8,8 +8,8 @@
         version = "0.1.0"; 
 
         src = prev.fetchurl {
-          url = "https://github.com/nullroute1970/ZeroDPI/releases/download/v20260529T190854Z-e891ea8ca03b/zerodpi-linux-x86_64.tar.gz";
-          hash = "sha256-VsA9BkxENO810eFbaggt89hzZ81yINC3nGm+CITbhCM=";
+          url = "https://github.com/nullroute1970/ZeroDPI/releases/download/v20260616T042633Z-88d22f0f994d/zerodpi-linux-x86_64.tar.gz";
+          hash = "sha256-BvEvl2qC8r/EO5hqkprCbKtJulsgmt/oXmp9udltYRM=";
         };
 
         nativeBuildInputs = [ prev.autoPatchelfHook ];

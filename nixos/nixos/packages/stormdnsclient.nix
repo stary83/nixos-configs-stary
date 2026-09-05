@@ -8,7 +8,7 @@
       # ──────────────────────────────────────────────────────────────
       stormdns = final.buildGoModule {
         pname = "stormdns";
-        version = "v2026.04.12.234117-978faee";
+        version = "1.0";
 
         src = final.fetchFromGitHub {
           owner = "nullroute1970";
@@ -39,6 +39,10 @@
 
 
     })
+  ];
+  
+  environment.systemPackages = with pkgs; [
+    stormdns
   ];
 }
 

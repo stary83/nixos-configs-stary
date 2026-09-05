@@ -2,7 +2,7 @@
 
 let
   unstable = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
-
+  
 in {
   environment.gnome.excludePackages = with pkgs; [
     orca
@@ -57,10 +57,10 @@ in {
   environment.systemPackages = with pkgs; [
     # --- unstable ------------------------------------
     unstable.ghostty
-    unstable.prismlauncher
+    
     # -------------------------------------------------
+
     inputs.prismlauncher.packages.${stdenv.hostPlatform.system}.prismlauncher
-    inputs.matugen.packages.${stdenv.hostPlatform.system}.default
     inputs.matugen.packages.${stdenv.hostPlatform.system}.default
 
     brightnessctl # allows to control brightness
@@ -71,7 +71,6 @@ in {
     blueman
     jq # needed for the waybar script
     pavucontrol # audio control
-    waywall # minecraft speedrunning utilitys
     lua
     xwayland-satellite # needed for niri, its how niri manages x11
     protonup-qt
@@ -89,9 +88,10 @@ in {
     gphoto2
     darktable
 
-
+    # basic packages
     vim
     wget
+    aria2
     tree
     curl
     vlc
@@ -109,8 +109,8 @@ in {
     google-chrome
     neovim
     yt-dlp
-    tdl # telegram download by id, must login first
-    deno
+    # tdl # telegram download by id, must login first
+    # deno
     gnome-keyring
     libsecret
     jdk
@@ -130,15 +130,14 @@ in {
     telegram-desktop
 
     deluge # torrent client
-    #torrential # not in the 25.11 stable release right now
 
     python3
-    python3Packages.pygobject3
 
     power-profiles-daemon
-    # floorp #browser
+    # floorp  #browser
     
     bluez
+
   ];
 
 }

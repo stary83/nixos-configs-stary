@@ -71,12 +71,12 @@
 
         home-manager.nixosModules.home-manager
         {
-	  home-manager.backupFileExtension = "bkp";
+	        home-manager.backupFileExtension = "bkp";
           home-manager.users.${host} = import ./hosts/${host}/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
-	    inherit pkgs;
-	  };
+	          inherit pkgs;
+	        };
         }
 
         {

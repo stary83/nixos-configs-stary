@@ -5,7 +5,7 @@
     settings = {
       user = {
         name = "stary83";
-	email = "visionarygambit@gmail.com";
+	      email = "visionarygambit@gmail.com";
       };
     };
   };

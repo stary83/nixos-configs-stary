@@ -8,11 +8,11 @@
       # ──────────────────────────────────────────────────────────────
       xray-core = prev.stdenv.mkDerivation rec {
         pname = "xray-core";
-        version = "26.3.27"; 
+        version = "26.7.28"; 
 
         src = prev.fetchurl {
           url = "https://github.com/XTLS/Xray-core/releases/download/v${version}/Xray-linux-64.zip";
-          hash = "sha256-I82a+Td0TZd3buNeytSXLPSyEJ0eD+a+mTBGdgj3yK4="; 
+          hash = "sha256-gZXZCfEQm489me7+QBo8RR179K9x8k04FUIPd+XdKkA="; 
         };
 
         nativeBuildInputs = [ prev.unzip ];

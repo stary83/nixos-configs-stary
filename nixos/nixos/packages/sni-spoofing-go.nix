@@ -36,5 +36,7 @@
       };
     })
   ];
-
+  environment.systemPackages = with pkgs; [
+    sni-spoofing-go
+  ];
 }

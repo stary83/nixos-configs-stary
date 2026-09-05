@@ -2,7 +2,7 @@
 
 {
   security.pki.certificates = [
-    # Paste the contents of your ca/ca.crt file here
+
     # certificate used by MasterHttpRelayVpn
     ''
     -----BEGIN CERTIFICATE-----
@@ -40,22 +40,7 @@
     hgA0AiBuEaq2k0X/5Ky4pKyb0xrc2+HlZ3oxelt4QuaZaw5NFQ==
     -----END CERTIFICATE-----
     ''
-
-    # used by mhrv-rs
-    ''
-    -----BEGIN CERTIFICATE-----
-    MIIBvDCCAWKgAwIBAgIUB9dYQCRyWQXrin+TBwYChRbVeHQwCgYIKoZIzj0EAwIw
-    OjEbMBkGA1UEAwwSTWFzdGVySHR0cFJlbGF5VlBOMRswGQYDVQQKDBJNYXN0ZXJI
-    dHRwUmVsYXlWUE4wHhcNMjYwNTIzMDYzNjQ0WhcNMzYwNTIwMDY0MTQ0WjA6MRsw
-    GQYDVQQDDBJNYXN0ZXJIdHRwUmVsYXlWUE4xGzAZBgNVBAoMEk1hc3Rlckh0dHBS
-    ZWxheVZQTjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABB5Ng+A2KIkeMW2embfj
-    NAre+CCuxmy6LwrGAIOx1EqKRJj2gl8htQSGjzmi1uJCZEGtvKDZFM7JE3sqije4
-    ePSjRjBEMA8GA1UdDwEB/wQFAwMHhgAwHQYDVR0OBBYEFHIbs1TdWE4ASlbmDHUI
-    XHWAQpyvMBIGA1UdEwEB/wQIMAYBAf8CAQAwCgYIKoZIzj0EAwIDSAAwRQIgAbn6
-    kHa7IWC0MBn3REmpbsvnuY11gxt6L2sM0kBXlu4CIQD5RPhezvkDz8gMyoLz9dmy
-    MnnT7gg6PDMPmY0yIBoIJA==
-    -----END CERTIFICATE-----
-    ''
+    
   ];
   environment.variables = {
     NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";

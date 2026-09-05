@@ -7,7 +7,7 @@
       logo = {
         source = "~/.face";
         padding = {
-	 left = 3;
+	        left = 3;
         };
       };
 

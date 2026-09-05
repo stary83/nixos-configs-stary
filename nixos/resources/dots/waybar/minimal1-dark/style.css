@@ -59,6 +59,11 @@ window#waybar {
   color: #fff;
 }
 
+#custom-dns {
+  padding-left: 5px;
+  color: #fff;
+}
+
 #clock, #cpu, #memory, #disk {
   color: #fff;
   background-color: transparent;

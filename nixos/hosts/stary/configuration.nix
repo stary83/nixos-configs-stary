@@ -14,7 +14,7 @@
     ../../nixos/graphics.nix
     ../../nixos/boot.nix
     ../../nixos/nix.nix
-    ../../nixos/flatpak.nix
+    # ../../nixos/flatpak.nix
     ../../nixos/security.nix
     ../../nixos/networking.nix
     # ../../nixos/website.nix
