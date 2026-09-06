@@ -10,16 +10,20 @@ in {
     packages/masterDnsVpn.nix
     packages/stormdnsclient.nix
     # packages/vaydns.nix 
-    packages/xray.nix
-    # packages/sni-spoofing-go.nix
-    # packages/zerodpi.nix
     # packages/psiphon.nix
     packages/senpai-scanner.nix
     # packages/windscribe.nix
-    packages/onionhop.nix
-    # packages/v2rayn.nix
-    packages/aether.nix
+    # packages/onionhop.nix
     packages/dns-hop.nix
+    
+    # ------ v2rayn & cores, v2rayn needs the cores to be imported ---
+    packages/v2rayn.nix
+    packages/mihomo.nix
+    packages/singbox.nix
+    packages/xray.nix
+    packages/v2ray-rules-dat.nix
+    # ----------------------------------------------------------------
+
     # ----------------------------------------------------------------
   ];
 
@@ -31,15 +35,9 @@ in {
     linux-wifi-hotspot # the cli for this provides the create_ap command
     haveged # wifi hotspot says this is needed
     openvpn
-    # smartdns
     sstp
     wireguard-tools
     libproxy
-    # temp-latest-stable.xray
-    xray-core # xrays latest version packaged by me
-    sing-box
-    # unstable.v2rayn
-    # v2rayn 
     tproxy
     # nebula
     

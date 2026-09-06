@@ -37,5 +37,5 @@
       };
     })
   ];
-
+  environment.systemPackages = [ xray-core ];
 }
