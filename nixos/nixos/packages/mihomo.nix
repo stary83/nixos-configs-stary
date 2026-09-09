@@ -25,7 +25,7 @@
       # fails to start, this is the first thing to roll back.
       # ──────────────────────────────────────────────────────────────
       mihomo = prev.stdenv.mkDerivation rec {
-        pname = "mihomo-bin";
+        pname = "mihomo";
         version = "1.19.30";
 
         src = prev.fetchurl {
@@ -63,5 +63,7 @@
       };
     })
   ];
-  environment.systemPackages = [ mihomo ];
+  # `with pkgs;` required - see note in singbox.nix (bare `mihomo` is an
+  # undefined variable at module scope, not the overlay's attribute).
+  environment.systemPackages = with pkgs; [ mihomo ];
 }

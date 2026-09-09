@@ -9,19 +9,18 @@ in {
     # --------------------- nixpkgs overlays -------------------------
     packages/masterDnsVpn.nix
     packages/stormdnsclient.nix
-    # packages/vaydns.nix 
-    # packages/psiphon.nix
     packages/senpai-scanner.nix
+    # packages/vaydns.nix 
     # packages/windscribe.nix
     # packages/onionhop.nix
-    packages/dns-hop.nix
+    # packages/dns-hop.nix
+    # packages/aether.nix
     
     # ------ v2rayn & cores, v2rayn needs the cores to be imported ---
     packages/v2rayn.nix
     packages/mihomo.nix
     packages/singbox.nix
     packages/xray.nix
-    packages/v2ray-rules-dat.nix
     # ----------------------------------------------------------------
 
     # ----------------------------------------------------------------

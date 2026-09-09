@@ -38,7 +38,7 @@
       #    schema first.
       # ──────────────────────────────────────────────────────────────
       sing-box = prev.stdenv.mkDerivation rec {
-        pname = "sing-box-bin";
+        pname = "sing-box";
         version = "1.13.21";
 
         src = prev.fetchurl {
@@ -77,5 +77,10 @@
       };
     })
   ];
-  environment.systemPackages = [ sing-box ];
+  # NOTE: `with pkgs;` is required, not cosmetic. Nix identifiers may contain
+  # '-', so a bare `[ sing-box ]` parses as a single *variable* named `sing-box`
+  # (not as subtraction) and fails with "undefined variable 'sing-box'" at
+  # module scope. The overlay below defines the attribute on `final`, so the
+  # package is only reachable through `pkgs`.
+  environment.systemPackages = with pkgs; [ sing-box ];
 }
