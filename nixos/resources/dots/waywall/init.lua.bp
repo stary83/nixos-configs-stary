@@ -1,0 +1,98 @@
+-- waywall configuration
+-- Managed by home-manager from nixos/resources/dots/waywall/init.lua
+-- Docs: https://tesselslate.github.io/waywall/
+
+local waywall = require("waywall")           -- REQUIRED. waywall is not a global.
+local helpers = require("waywall.helpers")
+
+-- ============================================================
+-- Resolutions. EDIT THESE THREE LINES.
+--
+-- waywall does not implement either Wayland scaling protocol, so
+-- these are raw pixel sizes it forces on the Minecraft window --
+-- they are NOT affected by your niri `scale 1.40`.
+-- ============================================================
+local WIDE = { 1280, 800 }   -- placeholder -- put your real wide macro here
+local SLIM = { 1152, 648 }   -- placeholder -- put your real slim macro here
+local TALL = { 384, 16384 }  -- optional third slot; delete if unused
+
+-- ============================================================
+-- Ninjabrain Bot
+--
+-- waywall.exec() splits the string on spaces and does no shell
+-- processing at all: no ~, no $VAR, no quoting. So the jar path
+-- must contain no spaces. os.getenv() is available (waywall's own
+-- startup code uses it).
+-- ============================================================
+local NBB_JAR = os.getenv("HOME") .. "/Desktop/a.jar"
+local NBB_CMD = "java"
+    .. " -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel"
+    .. " -jar " .. NBB_JAR
+
+local config = {
+    input = {
+        layout = "us",
+        remaps = {},
+
+        -- -1 = inherit repeat rate/delay from your main session.
+        -- If you raise repeat_rate above 20, use a longer repeat_delay
+        -- or hotbar switching breaks (documented game bug).
+        repeat_rate = -1,
+        repeat_delay = -1,
+
+        -- Only affects 3D camera aim, and only when Raw Input is
+        -- DISABLED in Minecraft's settings.
+        sensitivity = 1.0,
+        confine_pointer = false,
+    },
+
+    window = {
+        -- fullscreen_width = 1920,
+        -- fullscreen_height = 1200,
+    },
+
+    actions = {
+        -- ---- resolution macros ------------------------------------
+        -- helpers.toggle_res(w, h[, sens]) returns a function that
+        -- toggles between that resolution and "stretch to window",
+        -- and resets sensitivity on the way out.
+        ["Ctrl-Shift-W"] = helpers.toggle_res(WIDE[1], WIDE[2]),
+        ["Ctrl-Shift-S"] = helpers.toggle_res(SLIM[1], SLIM[2]),
+        ["Ctrl-Shift-T"] = helpers.toggle_res(TALL[1], TALL[2]),
+
+        -- ---- hard reset -------------------------------------------
+        ["Ctrl-Shift-R"] = function()
+            waywall.set_resolution(0, 0)
+            waywall.set_sensitivity(0)   -- 0 = reset to config default
+        end,
+
+        -- ---- Ninjabrain Bot ---------------------------------------
+        -- Floating windows are HIDDEN by default, so launching alone
+        -- looks like "nothing happened". Show them right after.
+        ["Ctrl-Shift-N"] = function()
+            waywall.exec(NBB_CMD)
+            waywall.sleep(500)           -- give the JVM time to map
+            waywall.show_floating(true)
+        end,
+
+        -- show/hide all floating windows
+        ["Ctrl-Shift-B"] = helpers.toggle_floating,
+
+        -- ---- fullscreen -------------------------------------------
+        -- NOT F11: your niri config binds F11 to fullscreen-window
+        -- (config.kdl:341), so niri eats it before waywall sees it.
+        -- Ctrl-Shift-F is free in both your niri and hyprland configs.
+        -- ["Ctrl-Shift-F"] = function()
+        --     waywall.toggle_fullscreen()
+        -- end,
+    },
+
+    theme = {
+        background = "#303030ff",
+        -- Pin NBB to a corner instead of dragging it (shift + left-drag
+        -- moves un-anchored floating windows manually):
+        -- ninb_anchor = { pos = "top_right" },
+    },
+}
+
+return config

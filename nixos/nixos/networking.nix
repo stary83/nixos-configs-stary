@@ -30,7 +30,6 @@ in {
     networkmanagerapplet
     libreswan
     strongswan
-    xl2tpd
     linux-wifi-hotspot # the cli for this provides the create_ap command
     haveged # wifi hotspot says this is needed
     openvpn
@@ -47,15 +46,18 @@ in {
   ];
 
   programs = { 
+
     nm-applet = {
       enable = true;
     };
+
     throne = {
       enable = true;
       tunMode.enable = true;
       tunMode.setuid = true;
     };
-    amnezia-vpn.enable = true;
+
+    # amnezia-vpn.enable = true;
   };
   services = {
     strongswan = {
@@ -83,14 +85,10 @@ in {
       allowedTCPPorts = [ ];
       allowedUDPPorts = [ ];
       allowedTCPPortRanges = [
-        { 
-          from = 18000;
-	        to = 18010;
-	      }
-        {
-          from = 19000;
-	        to = 19010;
-	      }
+        # { 
+          # from = 18000;
+	        # to = 18010;
+	      # }
       ];
       allowedUDPPortRanges = [];
 

@@ -31,6 +31,7 @@
     ../../nixos/podman.nix
     ../../nixos/docker.nix
     ../../nixos/nix-ld-alien.nix
+    ../../nixos/packages/video-photo-editing.nix
     # --------------------- nixpkgs overlays -------------------------
     # currently all are network related and imported into networking.nix
     # ----------------------------------------------------------------

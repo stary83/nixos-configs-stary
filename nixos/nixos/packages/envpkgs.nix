@@ -57,7 +57,6 @@ in {
   environment.systemPackages = with pkgs; [
     # --- unstable ------------------------------------
     unstable.ghostty
-    
     # -------------------------------------------------
 
     inputs.prismlauncher.packages.${stdenv.hostPlatform.system}.prismlauncher
@@ -74,21 +73,11 @@ in {
     lua
     xwayland-satellite # needed for niri, its how niri manages x11
     protonup-qt
-    zeal
-
     nuget-to-json
     dotnetCorePackages.sdk_8_0
-
-    #greetd.greetd
-    #greetd.tuigreet
-     
     gvfs
     udisks2
     usbutils
-    gphoto2
-    darktable
-
-    # basic packages
     vim
     wget
     aria2
@@ -101,16 +90,12 @@ in {
     tmux
     dig
     xhost
-
     gnome-tweaks 
     nautilus # file manager
-
     xdg-utils
     google-chrome
     neovim
     yt-dlp
-    # tdl # telegram download by id, must login first
-    # deno
     gnome-keyring
     libsecret
     jdk
@@ -121,23 +106,15 @@ in {
     unrar
     rar
     base16-schemes
-    #davinci-resolve
     clinfo
     httrack
     freetube
-
     localsend 
     telegram-desktop
-
     deluge # torrent client
-
     python3
-
     power-profiles-daemon
-    # floorp  #browser
-    
     bluez
-
   ];
 
 }

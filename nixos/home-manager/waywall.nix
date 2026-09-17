@@ -6,6 +6,6 @@
     waywall 
   ];
 
-  home.file.".config/waywall/init.lua".source = ../resources/dots/waywall/init.lau;
+  home.file.".config/waywall".source = ../resources/dots/waywall;
 
 }

@@ -24,7 +24,7 @@
     ./distrobox.nix
     ./dns-switcher.nix
     ./waywall.nix
-    ./thunderbird.nix
+    # ./thunderbird.nix
   ];
 
 }
